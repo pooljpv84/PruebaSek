@@ -188,7 +188,7 @@ public class RegistrarMatriculaActivity extends AppCompatActivity {
                         && String.valueOf(position).equals(horariosList.get(x).getIdMateria())) {
 
                     Log.i("sms equals "," raja: "+horariosList.get(x).getIdHorario());
-                    listaHorarios.add(String.valueOf(horariosList.get(x).getIdHorario())+" - "+String.valueOf(horariosList.get(x).getHora()));
+                    listaHorarios.add(String.valueOf(horariosList.get(x).getIdHorario())+". "+String.valueOf(horariosList.get(x).getDia())+" - "+String.valueOf(horariosList.get(x).getHora()));
                     listaidHorarios.add(String.valueOf(horariosList.get(x).getIdHorario()));
                 }else{
                     Log.i("sms equals "," borrado "+x);

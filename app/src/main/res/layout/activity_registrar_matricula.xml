@@ -226,6 +226,10 @@
 
 
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="145dp"
+                    android:orientation="vertical"/>
             </LinearLayout>
         </ScrollView>
 
@@ -244,7 +248,7 @@
             android:id="@+id/btnRegisterEst"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="REGISTRAR ESTUDIANTE"
+            android:text="MATRICULAR ESTUDIANTE"
             android:background="@drawable/ripple_celeste"
             android:textColor="@color/colorWhite"
             android:layout_margin="30dp"
