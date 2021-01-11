@@ -9,7 +9,7 @@ Por: Paul Velasco
 ## Construido con 🛠️
 * [MVC](https://si.ua.es/es/documentacion/asp-net-mvc-3/1-dia/modelo-vista-controlador-mvc.html) - Patrón Arquitectónico
 * [JAVA](https://www.java.com/es/download/help/whatis_java.html) - Lenguaje de Programación
-* [IDE](https://es.wikipedia.org/wiki/Android_Studio) - IDE de Android Studio ideal para desarrollo de aplicaciones nativas basadas en Android
+* [Android Studio](https://es.wikipedia.org/wiki/Android_Studio) - IDE de Android Studio ideal para desarrollo de aplicaciones nativas basadas en Android
 * [FIREBASE](https://es.wikipedia.org/wiki/Firebase) - Plataforma ubicada en la nube de Google con múltiples herramientas como BDD en tiempo real
 
 ### Base de datos NoSQL con Firebase:
