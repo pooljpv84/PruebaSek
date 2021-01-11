@@ -11,14 +11,15 @@ import android.widget.ArrayAdapter;
 
 import com.app.pruebasek.R;
 import com.app.pruebasek.includes.MyToolbart;
+import com.app.pruebasek.modelos.Horario;
 import com.app.pruebasek.modelos.Materia;
 import com.app.pruebasek.providers.EstudianteProvider;
+import com.app.pruebasek.providers.HorariosProvider;
 import com.app.pruebasek.providers.MateriasProvider;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.database.annotations.Nullable;
 import com.satsuware.usefulviews.LabelledSpinner;
 
 import java.util.ArrayList;
@@ -32,9 +33,11 @@ public class RegistrarMatriculaActivity extends AppCompatActivity {
     TextInputEditText mTextInputCedulaEst;
     EstudianteProvider mEstudianteProvider;
     MateriasProvider mMateriasProvider;
+    HorariosProvider mHorariosProvider;
     String midMateria;
-    ArrayList<String>listaMaterias;
-    LabelledSpinner mspinnerMateria;
+    ArrayList<String>listaMaterias, listaHorarios, listaidHorarios; ;
+    LabelledSpinner mspinnerMateria, mspinnerHorario;
+    String idFinalHorario;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +50,7 @@ public class RegistrarMatriculaActivity extends AppCompatActivity {
         mTextInputTelefonoEst= findViewById(R.id.TextInputTelefonoEst);
         mTextInputCedulaEst= findViewById(R.id.TextInputCedulaEst);
         mspinnerMateria = findViewById(R.id.spinnerMateria);
+        mspinnerHorario = findViewById(R.id.spinnerHorario);
         mTextInputNombresEst.setFocusable(false);
         mTextInputApellidosEst.setFocusable(false);
         mTextInputTelefonoEst.setFocusable(false);
@@ -54,6 +58,7 @@ public class RegistrarMatriculaActivity extends AppCompatActivity {
         //firebase
         mEstudianteProvider = new EstudianteProvider();
         mMateriasProvider = new MateriasProvider();
+        mHorariosProvider = new HorariosProvider();
         consultar(mExtracedula);
         loadMaterias();
         Log.i("sms","sms: "+mExtracedula);
@@ -108,21 +113,118 @@ public class RegistrarMatriculaActivity extends AppCompatActivity {
                 if (position == 0)
                 {
                     mspinnerMateria.setColor(R.color.colorPlomo);
-                //    loadRazas(especiesList,position);
+                    loadHorarios(materiasList,position);
                 }
                 else
                 {
-                  //  mspinnerEspecie.setColor(R.color.colorAccent);
+                    mspinnerMateria.setColor(R.color.colorAccent);
 
                 }
-                /*for (int i=0;i<especiesList.size();i++)
+                for (int i=0;i<materiasList.size();i++)
                 {
-                    if ((position) == Integer.parseInt(especiesList.get(i).getIdEspecie())){
-                        Log.i("sms aa "," "+especiesList.get(i).getIdEspecie());
-                        loadRazas(especiesList,position);
+                    if ((position) == Integer.parseInt(materiasList.get(i).getIdMateria())){
+                        Log.i("sms aa "," "+materiasList.get(i).getIdMateria());
+                        loadHorarios(materiasList,position);
                     }
-                }*/
+                }
                 //Snackbar.make(labelledSpinner, "Clicked " + adapterView.getItemAtPosition(position), Snackbar.LENGTH_LONG).show();
+            }
+            @Override
+            public void onNothingChosen(View labelledSpinner, AdapterView<?> adapterView)
+            {
+
+            }
+        });
+    }
+    private void loadHorarios(final List<Materia> materiasList, final int position)
+    {
+
+        final List<Horario> horariosList = new ArrayList<Horario>();
+
+        mHorariosProvider.getHorarios("Horarios")
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot)
+            {
+                if (dataSnapshot.exists())
+                {
+                    for (DataSnapshot ds: dataSnapshot.getChildren())
+                    {
+
+                        String idHorario = ds.getKey();
+                        String dia = ds.child("dia").getValue().toString();
+                        String hora = ds.child("hora").getValue().toString();
+                        String idMateria = ds.child("idMateria").getValue().toString();
+
+                        horariosList.add(new Horario(idHorario,dia,hora,idMateria));
+
+                    }
+                    opcionesHorarios(horariosList, materiasList,position);
+                }else
+                {
+                    Log.i("sms lista","error combo horarios");
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    public void opcionesHorarios(List<Horario> horariosList, List<Materia> materiasList, int position){
+        listaHorarios = new ArrayList<String>();
+        listaidHorarios = new ArrayList<String>();
+        listaHorarios.add("Seleccione");
+        listaidHorarios.add("Seleccione");
+
+        //istaRazas.clear();
+        for (int x=0;x <horariosList.size();x++){
+            for (int y=0;y<materiasList.size();y++){
+
+                if (horariosList.get(x).getIdMateria().equals(materiasList.get(y).getIdMateria())
+                        && String.valueOf(position).equals(horariosList.get(x).getIdMateria())) {
+
+                    Log.i("sms equals "," raja: "+horariosList.get(x).getIdHorario());
+                    listaHorarios.add(String.valueOf(horariosList.get(x).getIdHorario())+" - "+String.valueOf(horariosList.get(x).getHora()));
+                    listaidHorarios.add(String.valueOf(horariosList.get(x).getIdHorario()));
+                }else{
+                    Log.i("sms equals "," borrado "+x);
+                    //listaRazas.clear();
+                }
+                if (position == 0)
+                {
+                    listaHorarios.clear();
+                    listaidHorarios.clear();
+                    listaHorarios.add("Seleccione");
+                    listaidHorarios.add("Seleccione");
+
+                }
+
+            }
+        }
+
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(RegistrarMatriculaActivity.this, android.R.layout.simple_spinner_dropdown_item,listaHorarios);
+        mspinnerHorario.setCustomAdapter(arrayAdapter);
+
+        mspinnerHorario.setOnItemChosenListener(new LabelledSpinner.OnItemChosenListener() {
+            @Override
+            public void onItemChosen(View labelledSpinner, AdapterView<?> adapterView, View itemView, int position, long id) {
+                if (position == 0)
+                {
+                    mspinnerHorario.setColor(R.color.colorPlomo);
+                }
+                else
+                {
+                    mspinnerHorario.setColor(R.color.colorAccent);
+                    idFinalHorario = listaidHorarios.get(position).toString();
+                    //String[] parts = idFinalRaza.split(" - ");
+                    //part1 = parts[0];
+                }
+
+
             }
             @Override
             public void onNothingChosen(View labelledSpinner, AdapterView<?> adapterView) {
