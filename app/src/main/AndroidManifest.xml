@@ -11,12 +11,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PruebaSEK">
         <activity
+            android:name=".activities.ListaEstudiantesHActivity"
+            android:parentActivityName=".activities.MainActivity"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
             android:name=".activities.RegistrarMatriculaActivity"
             android:parentActivityName=".activities.ListaEstudiantesMActivity"
             tools:ignore="LockedOrientationActivity" />
-        <activity android:name=".activities.ListaEstudiantesMActivity"
+        <activity
+            android:name=".activities.ListaEstudiantesMActivity"
             android:parentActivityName=".activities.MainActivity"
-            tools:ignore="LockedOrientationActivity"/>
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activities.RegistroEstudianteActivity"
             android:parentActivityName=".activities.ListaEstudiantesActivity"

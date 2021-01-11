@@ -34,6 +34,12 @@ public class MainActivity extends AppCompatActivity {
                 abrirEstudiantesM();
             }
         });
+        cardHorarios.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                abrirEstudiantesH();
+            }
+        });
 
 
     }
@@ -48,4 +54,11 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(MainActivity.this, ListaEstudiantesMActivity.class);
         startActivity(intent);
     }
+    private void abrirEstudiantesH()
+    {
+        Intent intent = new Intent(MainActivity.this, ListaEstudiantesHActivity.class);
+        startActivity(intent);
+    }
+
+
 }

@@ -114,7 +114,7 @@ public class RegistrarMatriculaActivity extends AppCompatActivity {
                 if (task.isSuccessful())
                 {
 
-                    Intent intent = new Intent(RegistrarMatriculaActivity.this, ListaEstudiantesMActivity.class);
+                    Intent intent = new Intent(RegistrarMatriculaActivity.this, MainActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
                     Log.i("sms"," id matricula: "+matricula.getIdMatricula());
