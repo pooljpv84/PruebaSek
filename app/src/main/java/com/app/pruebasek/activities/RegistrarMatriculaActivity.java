@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 
 import com.app.pruebasek.R;
 import com.app.pruebasek.includes.MyToolbart;
@@ -38,6 +39,7 @@ public class RegistrarMatriculaActivity extends AppCompatActivity {
     ArrayList<String>listaMaterias, listaHorarios, listaidHorarios; ;
     LabelledSpinner mspinnerMateria, mspinnerHorario;
     String idFinalHorario;
+    Button mbtnMatricularEst;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +53,7 @@ public class RegistrarMatriculaActivity extends AppCompatActivity {
         mTextInputCedulaEst= findViewById(R.id.TextInputCedulaEst);
         mspinnerMateria = findViewById(R.id.spinnerMateria);
         mspinnerHorario = findViewById(R.id.spinnerHorario);
+        mbtnMatricularEst = findViewById(R.id.btnMatricularEst);
         mTextInputNombresEst.setFocusable(false);
         mTextInputApellidosEst.setFocusable(false);
         mTextInputTelefonoEst.setFocusable(false);
@@ -62,6 +65,25 @@ public class RegistrarMatriculaActivity extends AppCompatActivity {
         consultar(mExtracedula);
         loadMaterias();
         Log.i("sms","sms: "+mExtracedula);
+        mbtnMatricularEst.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) 
+            {
+            clickMatricular();    
+            }
+        });
+
+    }
+
+    private void clickMatricular()
+    {
+    final String idEstudiante = mTextInputCedulaEst.getText().toString();
+        final String nombresEstudiante = mTextInputNombresEst.getText().toString();
+        final String apellidosEstudiante= mTextInputApellidosEst.getText().toString();
+        final String telefonoEstudiante= mTextInputTelefonoEst.getText().toString();
+        final int posicionmateria = mspinnerMateria.getSpinner().getSelectedItemPosition();
+        final int posicionhorario = mspinnerHorario.getSpinner().getSelectedItemPosition();
+
     }
 
     private void loadMaterias()
