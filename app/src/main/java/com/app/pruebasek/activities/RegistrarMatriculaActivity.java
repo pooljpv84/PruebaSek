@@ -3,20 +3,26 @@ package com.app.pruebasek.activities;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.app.pruebasek.R;
 import com.app.pruebasek.includes.MyToolbart;
 import com.app.pruebasek.modelos.Horario;
 import com.app.pruebasek.modelos.Materia;
+import com.app.pruebasek.modelos.Matricula;
 import com.app.pruebasek.providers.EstudianteProvider;
 import com.app.pruebasek.providers.HorariosProvider;
 import com.app.pruebasek.providers.MateriasProvider;
+import com.app.pruebasek.providers.MatriculaProvider;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -35,11 +41,13 @@ public class RegistrarMatriculaActivity extends AppCompatActivity {
     EstudianteProvider mEstudianteProvider;
     MateriasProvider mMateriasProvider;
     HorariosProvider mHorariosProvider;
+    MatriculaProvider mMatriculaProvider;
     String midMateria;
     ArrayList<String>listaMaterias, listaHorarios, listaidHorarios; ;
     LabelledSpinner mspinnerMateria, mspinnerHorario;
     String idFinalHorario;
     Button mbtnMatricularEst;
+    long idMatricula=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +70,7 @@ public class RegistrarMatriculaActivity extends AppCompatActivity {
         mEstudianteProvider = new EstudianteProvider();
         mMateriasProvider = new MateriasProvider();
         mHorariosProvider = new HorariosProvider();
+        mMatriculaProvider = new MatriculaProvider();
         consultar(mExtracedula);
         loadMaterias();
         Log.i("sms","sms: "+mExtracedula);
@@ -87,11 +96,62 @@ public class RegistrarMatriculaActivity extends AppCompatActivity {
                 && !telefonoEstudiante.isEmpty()
                 && posicionmateria != 0 && posicionhorario!= 0 )
         {
-
+            Matricula matricula = new Matricula(String.valueOf(incrementoId()+1),idFinalHorario,String.valueOf(posicionmateria),mExtracedula);
+            registrarMatricula(matricula);
+        }
+        else{
+            Toast.makeText(this, "Ingrese todos los campos", Toast.LENGTH_SHORT).show();
         }
 
     }
 
+    private void registrarMatricula(final Matricula matricula)
+    {
+        mMatriculaProvider.create(matricula).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task)
+            {
+                if (task.isSuccessful())
+                {
+
+                    Intent intent = new Intent(RegistrarMatriculaActivity.this, ListaEstudiantesMActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+                    Log.i("sms"," id matricula: "+matricula.getIdMatricula());
+                    Toast.makeText(RegistrarMatriculaActivity.this, "Registro exitoso", Toast.LENGTH_LONG).show();
+                }
+                else
+                {
+                    Log.i("sms","error al registrar matricula");
+                }
+            }
+        });
+    }
+
+    private long incrementoId()
+    {
+        mMatriculaProvider.getMatriculadata().addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists())
+                {
+                    idMatricula = dataSnapshot.getChildrenCount();
+                    Log.i("sms contador ",""+idMatricula);
+                }
+                else
+                {
+                    idMatricula = 0;
+                    Log.i("sms contador else ",""+idMatricula);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        return idMatricula;
+    }
     private void loadMaterias()
     {
 
