@@ -21,9 +21,9 @@ Por: Paul Velasco
 ### Pantalla Principal
 ![img3](https://github.com/pooljpv84/PruebaSek/blob/master/instrucciones/3.PNG)
 #### Registrar Estudiantes
-![img4](https://github.com/pooljpv84/PruebaSek/blob/master/instrucciones/4.PNG)
+![img4](https://github.com/pooljpv84/PruebaSek/blob/master/instrucciones/4.png)
 #### Seleccionar Materias
-![img5](https://github.com/pooljpv84/PruebaSek/blob/master/instrucciones/5.PNG)
+![img5](https://github.com/pooljpv84/PruebaSek/blob/master/instrucciones/5.png)
 #### Ver Horario
-![img6](https://github.com/pooljpv84/PruebaSek/blob/master/instrucciones/6.PNG)
+![img6](https://github.com/pooljpv84/PruebaSek/blob/master/instrucciones/6.png)
 
