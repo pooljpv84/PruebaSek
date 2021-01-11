@@ -73,7 +73,7 @@ public class ListaEstudiantesMAdapter extends FirebaseRecyclerAdapter<Estudiante
             @Override
             public void onClick(View v)
             {
-                Intent intent = new Intent(mContext, HorarioFinalActivity.class);
+                Intent intent = new Intent(mContext, RegistrarMatriculaActivity.class);
                 intent.putExtra("idUserSeleccionado",id);
                 mContext.startActivity(intent);
             }

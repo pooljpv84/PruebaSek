@@ -73,6 +73,7 @@ public class RegistrarMatriculaActivity extends AppCompatActivity {
         mMatriculaProvider = new MatriculaProvider();
         consultar(mExtracedula);
         loadMaterias();
+        incrementoId();
         Log.i("sms","sms: "+mExtracedula);
         mbtnMatricularEst.setOnClickListener(new View.OnClickListener() {
             @Override
