@@ -25,7 +25,7 @@ public class ListaEstudiantesMActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_estudiantes_m);
-        MyToolbart.show(this,"Lista de estudiantes para asignar",true);
+        MyToolbart.show(this,"Elegir materias",true);
         mRecyclerView = findViewById(R.id.recyclerViewListaEstudiantes2);
         //layout manager ojo
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
