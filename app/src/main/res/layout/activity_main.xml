@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".activities.MainActivity">
+
+    <LinearLayout
+        android:id="@+id/idLayoutFondo"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/banner_redondo"
+        android:layout_marginTop="-70dp"
+        android:layout_marginLeft="-40dp"
+        android:layout_marginRight="-40dp">
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="-5dp">
+        <ImageView
+            android:id="@+id/avatarImage"
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/uno"
+            />
+        <TextView
+            android:id="@+id/textTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="0dp"
+            android:text="PRUEBA PAUL VELASCO"
+            android:textAlignment="center"
+            android:textColor="#ffffff"
+            android:textSize="19sp"
+            android:textStyle="bold" />
+
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+                <androidx.gridlayout.widget.GridLayout
+                    android:id="@+id/idGrid"
+                    android:layout_height="450dp"
+                    android:layout_width="match_parent"
+                    app:alignmentMode="alignMargins"
+                    android:padding="4dp"
+                    app:columnCount="1"
+                    app:rowCount="2"
+                    android:layout_below="@+id/textNickName">
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardEstudiantes"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp"
+                        android:layout_marginBottom="12dp"
+                        app:cardCornerRadius="8dp"
+                        app:cardElevation="6dp"
+                        app:layout_columnWeight="1"
+                        app:layout_rowWeight="1"
+                        android:clickable="true"
+                        android:foreground="?selectableItemBackground"
+                        android:backgroundTint="#ffffff"
+                        android:focusable="true">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="16dp"
+                            android:layout_gravity="center_horizontal|center_vertical"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="80dp"
+                                android:layout_height="80dp"
+                                android:layout_gravity="center_horizontal"
+                                android:src="@drawable/ic_student"
+                                 />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_centerHorizontal="true"
+                                android:layout_gravity="center_horizontal"
+                                android:text="Estudiantes"
+                                android:textAlignment="center"
+                                android:textColor="#000000"
+                                android:textSize="15sp"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardMaterias"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp"
+                        android:layout_marginBottom="12dp"
+                        app:cardCornerRadius="8dp"
+                        app:cardElevation="6dp"
+                        app:layout_columnWeight="1"
+                        app:layout_rowWeight="1"
+                        android:foreground="?selectableItemBackground"
+                        android:clickable="true"
+                        android:backgroundTint="@color/colorWhite"
+                        android:focusable="true">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="16dp"
+                            android:layout_gravity="center_horizontal|center_vertical"
+                            android:orientation="vertical">
+
+
+                            <ImageView
+                                android:layout_marginTop="-20dp"
+                                android:layout_width="180dp"
+                                android:layout_height="110dp"
+                                android:layout_gravity="center_horizontal"
+                                android:src="@drawable/ic_matricula" />
+
+
+
+                            <TextView
+                                android:layout_marginTop="-20dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="Seleccionar Materias"
+                                android:textAlignment="center"
+                                android:textColor="#000000"
+                                android:textSize="15sp"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardHorario"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp"
+                        android:layout_marginBottom="12dp"
+                        app:cardCornerRadius="8dp"
+                        app:cardElevation="6dp"
+                        app:layout_columnWeight="1"
+                        app:layout_rowWeight="1"
+                        android:foreground="?selectableItemBackground"
+                        android:clickable="true"
+                        android:backgroundTint="@color/colorWhite"
+                        android:focusable="true">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_margin="16dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal|center_vertical"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="80dp"
+                                android:layout_height="80dp"
+                                android:layout_gravity="center_horizontal"
+                                android:src="@drawable/ic_horario"
+                                 />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_centerHorizontal="true"
+                                android:text="Ver Horario"
+                                android:textAlignment="center"
+                                android:textColor="#000000"
+                                android:textSize="15sp"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+
+
+
+                </androidx.gridlayout.widget.GridLayout>
+            </LinearLayout>
+        </ScrollView>
+
+
+    </LinearLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
