@@ -40,7 +40,7 @@ public class HorariosProvider
     //ver si ya se creo la informacion para no sobreescribirla
     public DatabaseReference getHorario2(String idHorario)
     {
-        return mDatabase.child(idHorario);
+        return mDatabase.child("Horarios").child(idHorario);
     }
 
 

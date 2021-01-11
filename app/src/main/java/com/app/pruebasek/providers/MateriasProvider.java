@@ -23,6 +23,9 @@ public class MateriasProvider
     public DatabaseReference getMaterias(String materia){
         return mDatabase.child(materia);
     }
+    public DatabaseReference getNodoMaterias(String materia){
+        return mDatabase.child("Materias").child(materia);
+    }
 
     public Task<Void> create(Materia materia)
     {
