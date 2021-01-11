@@ -10,6 +10,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PruebaSEK">
+        <activity android:name=".activities.HorarioFinalActivity"></activity>
         <activity
             android:name=".activities.ListaEstudiantesHActivity"
             android:parentActivityName=".activities.MainActivity"

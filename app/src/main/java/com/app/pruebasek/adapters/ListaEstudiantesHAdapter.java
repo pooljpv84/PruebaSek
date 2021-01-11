@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.app.pruebasek.R;
+import com.app.pruebasek.activities.HorarioFinalActivity;
 import com.app.pruebasek.activities.RegistrarMatriculaActivity;
 import com.app.pruebasek.modelos.Estudiante;
 import com.app.pruebasek.providers.EstudianteProvider;
@@ -68,9 +69,9 @@ public class ListaEstudiantesHAdapter extends FirebaseRecyclerAdapter<Estudiante
             @Override
             public void onClick(View v)
             {
-                //Intent intent = new Intent(mContext, RegistrarMatriculaActivity.class);
-                //intent.putExtra("idUserSeleccionado",id);
-                //mContext.startActivity(intent);
+                Intent intent = new Intent(mContext, HorarioFinalActivity.class);
+                intent.putExtra("idUserSeleccionado",id);
+                mContext.startActivity(intent);
             }
         });
     }
