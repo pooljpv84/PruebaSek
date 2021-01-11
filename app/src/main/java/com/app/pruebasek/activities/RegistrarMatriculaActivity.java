@@ -83,6 +83,12 @@ public class RegistrarMatriculaActivity extends AppCompatActivity {
         final String telefonoEstudiante= mTextInputTelefonoEst.getText().toString();
         final int posicionmateria = mspinnerMateria.getSpinner().getSelectedItemPosition();
         final int posicionhorario = mspinnerHorario.getSpinner().getSelectedItemPosition();
+        if (!idEstudiante.isEmpty() && !nombresEstudiante.isEmpty() && !apellidosEstudiante.isEmpty()
+                && !telefonoEstudiante.isEmpty()
+                && posicionmateria != 0 && posicionhorario!= 0 )
+        {
+
+        }
 
     }
 
