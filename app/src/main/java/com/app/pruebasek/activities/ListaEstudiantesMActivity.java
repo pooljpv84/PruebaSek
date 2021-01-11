@@ -11,9 +11,12 @@ import com.app.pruebasek.adapters.ListaEstudiantesAdapter;
 import com.app.pruebasek.adapters.ListaEstudiantesMAdapter;
 import com.app.pruebasek.includes.MyToolbart;
 import com.app.pruebasek.modelos.Estudiante;
+import com.app.pruebasek.modelos.Matricula;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+
+import java.util.EnumSet;
 
 public class ListaEstudiantesMActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
@@ -23,7 +26,7 @@ public class ListaEstudiantesMActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_estudiantes_m);
         MyToolbart.show(this,"Lista de estudiantes para asignar",true);
-        mRecyclerView = findViewById(R.id.recyclerViewListaEstudiantes2);
+        mRecyclerView = findViewById(R.id.recyclerViewListaEstudiantes3);
         //layout manager ojo
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(linearLayoutManager);

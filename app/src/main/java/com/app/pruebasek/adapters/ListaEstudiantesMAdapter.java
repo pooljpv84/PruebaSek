@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.app.pruebasek.R;
+import com.app.pruebasek.activities.HorarioFinalActivity;
 import com.app.pruebasek.activities.RegistrarMatriculaActivity;
 import com.app.pruebasek.modelos.Estudiante;
 import com.app.pruebasek.providers.EstudianteProvider;
@@ -36,7 +37,7 @@ public class ListaEstudiantesMAdapter extends FirebaseRecyclerAdapter<Estudiante
     @Override
     protected void onBindViewHolder(@NonNull final ListaEstudiantesMAdapter.ViewHolder holder, int position, @NonNull Estudiante estudiante)
     {
-        //id del la lista de dcotores
+        //id del la lista de estudiantes
         final String id = getRef(position).getKey();
 
         //acede a los campos
@@ -46,33 +47,33 @@ public class ListaEstudiantesMAdapter extends FirebaseRecyclerAdapter<Estudiante
         mEstudianteProvider.getEstudiante(estudiante.getIdEstudiante().toString())
                 .addListenerForSingleValueEvent(new ValueEventListener() {
 
-            @SuppressLint("SetTextI18n")
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Log.i("sms","saa");
-                if (dataSnapshot.exists()){
-                    String name = dataSnapshot.child("nombresEstudiante").getValue().toString();
-                    String apellido = dataSnapshot.child("apellidosEstudiante").getValue().toString();
-                    String cedula = dataSnapshot.child("idEstudiante").getValue().toString();
+                    @SuppressLint("SetTextI18n")
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        Log.i("sms","saa");
+                        if (dataSnapshot.exists()){
+                            String name = dataSnapshot.child("nombresEstudiante").getValue().toString();
+                            String apellido = dataSnapshot.child("apellidosEstudiante").getValue().toString();
+                            String cedula = dataSnapshot.child("idEstudiante").getValue().toString();
 
 
-                    holder.textViewName.setText(name+" "+apellido);
-                    holder.textviewcedula.setText(cedula);
+                            holder.textViewName.setText(name+" "+apellido);
+                            holder.textviewcedula.setText(cedula);
 
-                }
-            }
+                        }
+                    }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
 
-            }
-        });
+                    }
+                });
         //al dar click en el elemento del cardview
         holder.mview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
             {
-                Intent intent = new Intent(mContext, RegistrarMatriculaActivity.class);
+                Intent intent = new Intent(mContext, HorarioFinalActivity.class);
                 intent.putExtra("idUserSeleccionado",id);
                 mContext.startActivity(intent);
             }

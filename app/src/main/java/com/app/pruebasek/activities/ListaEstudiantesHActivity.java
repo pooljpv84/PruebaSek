@@ -11,6 +11,7 @@ import com.app.pruebasek.adapters.ListaEstudiantesHAdapter;
 import com.app.pruebasek.adapters.ListaEstudiantesMAdapter;
 import com.app.pruebasek.includes.MyToolbart;
 import com.app.pruebasek.modelos.Estudiante;
+import com.app.pruebasek.modelos.Matricula;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
@@ -35,9 +36,9 @@ public class ListaEstudiantesHActivity extends AppCompatActivity {
 
         //OBTENER LOS HISTORY BOOKING DONDE EL ID DEL CLIENTE SEA IGUAL AL IDE DE LA SESION INICIADA
         Query query = FirebaseDatabase.getInstance().getReference()
-                .child("Estudiantes");
-        FirebaseRecyclerOptions<Estudiante> options = new FirebaseRecyclerOptions.Builder<Estudiante>()
-                .setQuery(query,Estudiante.class)
+                .child("Matricula");
+        FirebaseRecyclerOptions<Matricula> options = new FirebaseRecyclerOptions.Builder<Matricula>()
+                .setQuery(query,Matricula.class)
                 .build();
 
         mAdapter = new ListaEstudiantesHAdapter(options, ListaEstudiantesHActivity.this);

@@ -16,54 +16,61 @@ import com.app.pruebasek.R;
 import com.app.pruebasek.activities.HorarioFinalActivity;
 import com.app.pruebasek.activities.RegistrarMatriculaActivity;
 import com.app.pruebasek.modelos.Estudiante;
+import com.app.pruebasek.modelos.Matricula;
 import com.app.pruebasek.providers.EstudianteProvider;
+import com.app.pruebasek.providers.MatriculaProvider;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 
-public class ListaEstudiantesHAdapter extends FirebaseRecyclerAdapter<Estudiante, ListaEstudiantesHAdapter.ViewHolder>
+public class ListaEstudiantesHAdapter extends FirebaseRecyclerAdapter<Matricula, ListaEstudiantesHAdapter.ViewHolder>
 {
 
-    private EstudianteProvider mEstudianteProvider;
+    private MatriculaProvider mMatriculaProvider;
     private Context mContext;
-    public ListaEstudiantesHAdapter(@NonNull FirebaseRecyclerOptions<Estudiante> options, Context context) {
+    public ListaEstudiantesHAdapter(@NonNull FirebaseRecyclerOptions<Matricula> options, Context context) {
         super(options);
-        mEstudianteProvider = new EstudianteProvider();
+        mMatriculaProvider = new MatriculaProvider();
         mContext = context;
     }
 
     @Override
-    protected void onBindViewHolder(@NonNull final ListaEstudiantesHAdapter.ViewHolder holder, int position, @NonNull Estudiante estudiante)
+    protected void onBindViewHolder(@NonNull final ListaEstudiantesHAdapter.ViewHolder holder, int position, @NonNull Matricula matricula)
     {
-        //id del la lista de dcotores
+        //id del la lista de estudiantes
         final String id = getRef(position).getKey();
 
         //acede a los campos
-        holder.textViewName.setText(estudiante.getNombresEstudiante());
+        holder.textViewName.setText(matricula.getIdEstudiante());
 
 
-        mEstudianteProvider.getEstudiante(estudiante.getIdEstudiante().toString())
+        mMatriculaProvider.getMatricula(matricula.getIdMatricula().toString())
+
                 .addListenerForSingleValueEvent(new ValueEventListener() {
 
-            @SuppressLint("SetTextI18n")
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Log.i("sms","saa");
-                if (dataSnapshot.exists()){
-                    String name = dataSnapshot.child("nombresEstudiante").getValue().toString();
-                    String apellido = dataSnapshot.child("apellidosEstudiante").getValue().toString();
-                    String cedula = dataSnapshot.child("idEstudiante").getValue().toString();
-                    holder.textViewName.setText(name+" "+apellido);
-                    holder.textviewcedula.setText(cedula);
-                }
-            }
+                    @SuppressLint("SetTextI18n")
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        Log.i("sms","saa");
+                        if (dataSnapshot.exists()){
+                            String idEstudiante = dataSnapshot.child("idEstudiante").getValue().toString();
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-            }
-        });
+                            String idMatricula = dataSnapshot.child("idMatricula").getValue().toString();
+
+
+                            holder.textViewName.setText(idEstudiante);
+                            holder.textviewcedula.setText(idMatricula);
+
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
         //al dar click en el elemento del cardview
         holder.mview.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,6 +81,7 @@ public class ListaEstudiantesHAdapter extends FirebaseRecyclerAdapter<Estudiante
                 mContext.startActivity(intent);
             }
         });
+
     }
 
     @NonNull
@@ -84,8 +92,13 @@ public class ListaEstudiantesHAdapter extends FirebaseRecyclerAdapter<Estudiante
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
+
+
         private View mview;
         private TextView textViewName, textviewcedula;
+
+
+
         public ViewHolder(View view)
         {
             super(view);
